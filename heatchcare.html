@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sachin Gupta Healthcare - Premium teffen service for hospital patients">
+  <title>Sachin Gupta | Healthcare Services</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    /* CSS Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: #2d3748;
+      background: #f0fdf4;
+      overflow-x: hidden;
+    }
+
+    .site-wrapper {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    /* Custom Properties */
+    :root {
+      --color-primary: #22c55e;
+      --color-secondary: #f0fdf4;
+      --color-text: #1e3a2f;
+      --color-accent: #10b981;
+      --color-highlight: #86efac;
+    }
+
+    /* Navigation */
+    .nav-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(34, 197, 94, 0.1);
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--color-text);
+    }
+
+    .logo-icon {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+    }
+
+    .logo-text {
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--color-text);
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text);
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--color-primary);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: white !important;
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+    }
+
+    .nav-cta::after {
+      display: none !important;
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .mobile-menu-btn span {
+      width: 25px;
+      height: 3px;
+      background: var(--color-text);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100%;
+      padding: 120px 1.5rem 4rem;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 50%, #bbf7d0 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 80%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(134, 239, 172, 0.4) 0%, transparent 70%);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -20%;
+      width: 60%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.2) 0%, transparent 70%);
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(30px, 20px) rotate(5deg); }
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text {
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-accent);
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.15);
+      margin-bottom: 1.5rem;
+      animation: bounce-in 0.8s ease;
+    }
+
+    @keyframes bounce-in {
+      0% { opacity: 0; transform: translateY(-20px); }
+      60% { transform: translateY(5px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+      animation: slide-up 0.8s ease 0.2s both;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    @keyframes slide-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-description {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: #4a5568;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      animation: slide-up 0.8s ease 0.4s both;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      animation: slide-up 0.8s ease 0.6s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.35);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(34, 197, 94, 0.45);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--color-text);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-3px);
+    }
+
+    /* Stats Section */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+      animation: slide-up 0.8s ease 0.8s both;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 1.5rem 1rem;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(34, 197, 94, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      font-family: 'Quicksand', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: #718096;
+      margin-top: 0.25rem;
+    }
+
+    /* Portfolio Section */
+    .portfolio {
+      padding: 5rem 1.5rem;
+      background: white;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+      color: var(--color-accent);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--color-text);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      color: #718096;
+      font-size: 1rem;
+    }
+
+    .portfolio-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .portfolio-card {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(34, 197, 94, 0.2);
+    }
+
+    .portfolio-image {
+      height: 200px;
+      background: linear-gradient(135deg, var(--color-highlight), var(--color-primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .portfolio-icon {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      z-index: 1;
+    }
+
+    .portfolio-content {
+      padding: 1.5rem;
+    }
+
+    .portfolio-category {
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .portfolio-title {
+      font-size: 1.25rem;
+      color: var(--color-text);
+      margin: 0.5rem 0;
+    }
+
+    .portfolio-description {
+      font-size: 0.9rem;
+      color: #718096;
+      line-height: 1.6;
+    }
+
+    /* About Section */
+    .about {
+      padding: 5rem 1.5rem;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    }
+
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image-wrapper {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: 30px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+    }
+
+    .about-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-text h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text h2 span {
+      color: var(--color-primary);
+    }
+
+    .about-description {
+      color: #4a5568;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .about-features {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: white;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateX(10px);
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .feature-text h4 {
+      font-size: 1rem;
+      color: var(--color-text);
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-text p {
+      font-size: 0.85rem;
+      color: #718096;
+    }
+
+    /* Services Section */
+    .services {
+      padding: 5rem 1.5rem;
+      background: white;
+    }
+
+    .services-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(34, 197, 94, 0.15);
+    }
+
+    .service-icon {
+      width: 70px;
+      height: 70px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.2);
+    }
+
+    .service-title {
+      font-size: 1.2rem;
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-description {
+      font-size: 0.9rem;
+      color: #718096;
+      line-height: 1.6;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 5rem 1.5rem;
+      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    }
+
+    .contact-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2rem;
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 20px rgba(34, 197, 94, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .contact-icon {
+      width: 55px;
+      height: 55px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-card h4 {
+      font-size: 1rem;
+      color: var(--color-text);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-card p {
+      font-size: 0.9rem;
+      color: #718096;
+    }
+
+    .contact-form-wrapper {
+      background: white;
+      padding: 2rem;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(34, 197, 94, 0.1);
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: #f8fafc;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      background: white;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.1);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      color: white;
+      padding: 1.1rem 2rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(34, 197, 94, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--color-text);
+      color: white;
+      padding: 3rem 1.5rem 1.5rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-main {
+      display: grid;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo {
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-brand span {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .footer-description {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      max-width: 300px;
+    }
+
+    .footer-links h4 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .footer-links ul {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-highlight);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      background: var(--color-primary);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      padding-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-copyright {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.85rem;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-legal a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-legal a:hover {
+      color: var(--color-highlight);
+    }
+
+    /* Mobile Navigation */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: white;
+      z-index: 999;
+      padding: 6rem 2rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.4s ease;
+    }
+
+    .mobile-nav.active {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav-links a {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--color-text);
+      text-decoration: none;
+      display: block;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid #f0fdf4;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-nav-links a:hover {
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Responsive Styles */
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+      }
+
+      .hero-text {
+        text-align: left;
+      }
+
+      .hero-buttons {
+        justify-content: flex-start;
+      }
+
+      .about-container {
+        grid-template-columns: 1fr 1.2fr;
+      }
+
+      .contact-container {
+        grid-template-columns: 1fr 1.5fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-main {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero {
+        padding: 140px 2rem 5rem;
+      }
+
+      .portfolio,
+      .services,
+      .about,
+      .contact {
+        padding: 6rem 2rem;
+      }
+    }
+
+    /* Animations on scroll */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Form Success Message */
+    .form-success {
+      display: none;
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border: 2px solid var(--color-primary);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      color: var(--color-text);
+    }
+
+    .form-success.show {
+      display: block;
+      animation: slide-up 0.5s ease;
+    }
+
+    .form-success h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-primary);
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="site-wrapper"><!-- Navigation -->
+   <header class="nav-container">
+    <nav><a href="#" class="logo">
+      <div class="logo-icon">
+       <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+       </svg>
+      </div><span class="logo-text">Sachin Gupta</span> </a>
+     <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+     </ul><button class="mobile-menu-btn" aria-label="Open menu" onclick="toggleMobileMenu()"> <span></span> <span></span> <span></span> </button>
+    </nav>
+   </header><!-- Mobile Navigation -->
+   <div class="mobile-nav" id="mobileNav"><button class="close-menu" aria-label="Close menu" onclick="toggleMobileMenu()">
+     <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="#1e3a2f" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18" /> <line x1="6" y1="6" x2="18" y2="18" />
+     </svg></button>
+    <ul class="mobile-nav-links">
+     <li><a href="#home" onclick="toggleMobileMenu()">Home</a></li>
+     <li><a href="#services" onclick="toggleMobileMenu()">Services</a></li>
+     <li><a href="#portfolio" onclick="toggleMobileMenu()">Portfolio</a></li>
+     <li><a href="#about" onclick="toggleMobileMenu()">About</a></li>
+     <li><a href="#contact" onclick="toggleMobileMenu()">Contact</a></li>
+    </ul>
+   </div><!-- Hero Section -->
+   <section class="hero" id="home">
+    <div class="hero-content">
+     <div class="hero-text">
+      <div class="hero-badge">
+       <svg width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+       </svg> Premium Healthcare Services
+      </div>
+      <h1 id="heroTitle"><span>Nourishing</span> Care for Every Patient</h1>
+      <p class="hero-description" id="heroSubtitle">Delivering exceptional teffen service to hospital patients with fresh, nutritious meals prepared with love and care. Your health is our priority.</p>
+      <div class="hero-buttons"><a href="#contact" class="btn-primary">
+        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        </svg> Get Started </a> <a href="#services" class="btn-secondary">
+        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /> <polygon points="10 8 16 12 10 16 10 8" />
+        </svg> Our Services </a>
+      </div>
+      <div class="hero-stats">
+       <div class="stat-card">
+        <div class="stat-number">
+         500+
+        </div>
+        <div class="stat-label">
+         Patients Served
+        </div>
+       </div>
+       <div class="stat-card">
+        <div class="stat-number">
+         15+
+        </div>
+        <div class="stat-label">
+         Partner Hospitals
+        </div>
+       </div>
+       <div class="stat-card">
+        <div class="stat-number">
+         98%
+        </div>
+        <div class="stat-label">
+         Satisfaction Rate
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="hero-image animate-on-scroll">
+      <svg viewbox="0 0 400 400" style="width: 100%; max-width: 450px; margin: 0 auto; display: block;"><!-- Background circle --> <circle cx="200" cy="200" r="180" fill="#dcfce7" /> <circle cx="200" cy="200" r="150" fill="#bbf7d0" /> <!-- Plate --> <ellipse cx="200" cy="220" rx="120" ry="40" fill="#e5e7eb" /> <ellipse cx="200" cy="210" rx="110" ry="35" fill="#f9fafb" /> <ellipse cx="200" cy="205" rx="95" ry="28" fill="#fff" /> <!-- Food items --> <ellipse cx="180" cy="190" rx="35" ry="20" fill="#22c55e" /> <ellipse cx="220" cy="185" rx="30" ry="18" fill="#f97316" /> <circle cx="200" cy="175" r="15" fill="#ef4444" /> <ellipse cx="165" cy="195" rx="20" ry="12" fill="#84cc16" /> <!-- Steam --> <path d="M170 140 Q175 130 170 120" stroke="#9ca3af" stroke-width="3" fill="none" opacity="0.6">
+        <animate attributename="d" values="M170 140 Q175 130 170 120;M170 140 Q165 130 170 120;M170 140 Q175 130 170 120" dur="2s" repeatcount="indefinite" />
+       </path> <path d="M200 135 Q205 125 200 115" stroke="#9ca3af" stroke-width="3" fill="none" opacity="0.6">
+        <animate attributename="d" values="M200 135 Q205 125 200 115;M200 135 Q195 125 200 115;M200 135 Q205 125 200 115" dur="2.2s" repeatcount="indefinite" />
+       </path> <path d="M230 140 Q235 130 230 120" stroke="#9ca3af" stroke-width="3" fill="none" opacity="0.6">
+        <animate attributename="d" values="M230 140 Q235 130 230 120;M230 140 Q225 130 230 120;M230 140 Q235 130 230 120" dur="1.8s" repeatcount="indefinite" />
+       </path> <!-- Decorative leaves --> <path d="M80 150 Q100 140 90 120" stroke="#22c55e" stroke-width="4" fill="none" /> <path d="M85 145 Q75 130 85 115" stroke="#22c55e" stroke-width="3" fill="none" /> <path d="M320 160 Q300 150 310 130" stroke="#22c55e" stroke-width="4" fill="none" /> <path d="M315 155 Q325 140 315 125" stroke="#22c55e" stroke-width="3" fill="none" /> <!-- Heart icon --> <path d="M200 290 L185 275 A15 15 0 0 1 200 255 A15 15 0 0 1 215 275 Z" fill="#ef4444" />
+      </svg>
+     </div>
+    </div>
+   </section><!-- Services Section -->
+   <section class="services" id="services">
+    <div class="section-header"><span class="section-tag">What We Offer</span>
+     <h2 class="section-title" id="servicesTitle">Our Healthcare Services</h2>
+     <p class="section-subtitle">Comprehensive teffen service designed to support patient recovery and well-being</p>
+    </div>
+    <div class="services-grid">
+     <div class="service-card animate-on-scroll">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1" /> <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" /> <line x1="6" y1="1" x2="6" y2="4" /> <line x1="10" y1="1" x2="10" y2="4" /> <line x1="14" y1="1" x2="14" y2="4" />
+       </svg>
+      </div>
+      <h3 class="service-title">Nutritious Meals</h3>
+      <p class="service-description">Fresh, balanced meals tailored to patient dietary needs and medical requirements.</p>
+     </div>
+     <div class="service-card animate-on-scroll">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /> <path d="M9 12l2 2 4-4" />
+       </svg>
+      </div>
+      <h3 class="service-title">Hygiene Assured</h3>
+      <p class="service-description">Strict hygiene protocols ensuring safe, contamination-free food preparation.</p>
+     </div>
+     <div class="service-card animate-on-scroll">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><circle cx="12" cy="12" r="10" /> <polyline points="12 6 12 12 16 14" />
+       </svg>
+      </div>
+      <h3 class="service-title">Timely Delivery</h3>
+      <p class="service-description">Punctual meal delivery aligned with hospital schedules and patient needs.</p>
+     </div>
+     <div class="service-card animate-on-scroll">
+      <div class="service-icon">
+       <svg width="32" height="32" viewbox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+       </svg>
+      </div>
+      <h3 class="service-title">Care &amp; Comfort</h3>
+      <p class="service-description">Meals prepared with love to bring comfort during recovery.</p>
+     </div>
+    </div>
+   </section><!-- Portfolio Section -->
+   <section class="portfolio" id="portfolio">
+    <div class="section-header"><span class="section-tag">Our Work</span>
+     <h2 class="section-title">Portfolio Showcase</h2>
+     <p class="section-subtitle">Discover our range of healthy meal options designed for patient wellness</p>
+    </div>
+    <div class="portfolio-grid">
+     <article class="portfolio-card animate-on-scroll">
+      <div class="portfolio-image">
+       <div class="portfolio-icon">
+        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+       </div>
+      </div>
+      <div class="portfolio-content"><span class="portfolio-category">Breakfast Menu</span>
+       <h3 class="portfolio-title">Morning Wellness Bowl</h3>
+       <p class="portfolio-description">Energizing breakfast options packed with nutrients to start the day right.</p>
+      </div>
+     </article>
+     <article class="portfolio-card animate-on-scroll">
+      <div class="portfolio-image" style="background: linear-gradient(135deg, #fef3c7, #fbbf24);">
+       <div class="portfolio-icon">
+        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><circle cx="12" cy="12" r="5" /> <line x1="12" y1="1" x2="12" y2="3" /> <line x1="12" y1="21" x2="12" y2="23" /> <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /> <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" /> <line x1="1" y1="12" x2="3" y2="12" /> <line x1="21" y1="12" x2="23" y2="12" /> <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /> <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+       </div>
+      </div>
+      <div class="portfolio-content"><span class="portfolio-category">Lunch Menu</span>
+       <h3 class="portfolio-title">Balanced Lunch Platter</h3>
+       <p class="portfolio-description">Wholesome midday meals with perfect balance of proteins and vegetables.</p>
+      </div>
+     </article>
+     <article class="portfolio-card animate-on-scroll">
+      <div class="portfolio-image" style="background: linear-gradient(135deg, #ddd6fe, #8b5cf6);">
+       <div class="portfolio-icon">
+        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+        </svg>
+       </div>
+      </div>
+      <div class="portfolio-content"><span class="portfolio-category">Special Diet</span>
+       <h3 class="portfolio-title">Therapeutic Meals</h3>
+       <p class="portfolio-description">Customized meals for diabetic, cardiac, and post-surgery patients.</p>
+      </div>
+     </article>
+     <article class="portfolio-card animate-on-scroll">
+      <div class="portfolio-image" style="background: linear-gradient(135deg, #fecaca, #ef4444);">
+       <div class="portfolio-icon">
+        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+        </svg>
+       </div>
+      </div>
+      <div class="portfolio-content"><span class="portfolio-category">Evening Menu</span>
+       <h3 class="portfolio-title">Light Dinner Options</h3>
+       <p class="portfolio-description">Easy-to-digest evening meals promoting restful sleep and recovery.</p>
+      </div>
+     </article>
+     <article class="portfolio-card animate-on-scroll">
+      <div class="portfolio-image" style="background: linear-gradient(135deg, #a7f3d0, #10b981);">
+       <div class="portfolio-icon">
+        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+       </div>
+      </div>
+      <div class="portfolio-content"><span class="portfolio-category">Snacks</span>
+       <h3 class="portfolio-title">Healthy Snack Box</h3>
+       <p class="portfolio-description">Nutritious between-meal snacks to maintain energy levels throughout the day.</p>
+      </div>
+     </article>
+     <article class="portfolio-card animate-on-scroll">
+      <div class="portfolio-image" style="background: linear-gradient(135deg, #bfdbfe, #3b82f6);">
+       <div class="portfolio-icon">
+        <svg width="40" height="40" viewbox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /> <polyline points="14 2 14 8 20 8" /> <line x1="16" y1="13" x2="8" y2="13" /> <line x1="16" y1="17" x2="8" y2="17" /> <polyline points="10 9 9 9 8 9" />
+        </svg>
+       </div>
+      </div>
+      <div class="portfolio-content"><span class="portfolio-category">Planning</span>
+       <h3 class="portfolio-title">Diet Consultation</h3>
+       <p class="portfolio-description">Personalized meal planning with nutritionist guidance for optimal recovery.</p>
+      </div>
+     </article>
+    </div>
+   </section><!-- About Section -->
+   <section class="about" id="about">
+    <div class="about-container">
+     <div class="about-image animate-on-scroll">
+      <div class="about-image-wrapper">
+       <div class="about-avatar">
+        <svg viewbox="0 0 200 200" style="width: 100%; height: 100%;"><!-- Background --> <rect width="200" height="200" fill="#f0fdf4" rx="20" /> <!-- Person silhouette --> <circle cx="100" cy="70" r="35" fill="#22c55e" /> <ellipse cx="100" cy="160" rx="55" ry="45" fill="#22c55e" /> <!-- Face details --> <circle cx="88" cy="65" r="4" fill="white" /> <circle cx="112" cy="65" r="4" fill="white" /> <path d="M92 80 Q100 88 108 80" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" /> <!-- Stethoscope --> <path d="M70 100 Q60 120 75 140" stroke="#1e3a2f" stroke-width="4" fill="none" /> <circle cx="75" cy="145" r="8" fill="#1e3a2f" /> <circle cx="75" cy="145" r="4" fill="#22c55e" /> <!-- Heart badge --> <circle cx="130" cy="130" r="20" fill="white" /> <path d="M130 125 L124 131 A6 6 0 0 1 130 119 A6 6 0 0 1 136 131 Z" fill="#ef4444" />
+        </svg>
+       </div>
+      </div>
+     </div>
+     <div class="about-text animate-on-scroll"><span class="section-tag">About Us</span>
+      <h2 id="aboutTitle">Caring for <span>Patients</span> Through Nutrition</h2>
+      <p class="about-description" id="aboutDescription">At Sachin Gupta Healthcare, we believe that proper nutrition is fundamental to patient recovery. Our teffen service delivers fresh, hygienically prepared meals to hospital patients, ensuring they receive the nourishment they need during their healing journey. With over a decade of experience, we partner with leading hospitals to provide exceptional food service that supports medical treatment and enhances patient comfort.</p>
+      <div class="about-features">
+       <div class="feature-item">
+        <div class="feature-icon">
+         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /> <polyline points="22 4 12 14.01 9 11.01" />
+         </svg>
+        </div>
+        <div class="feature-text">
+         <h4>Quality Assured</h4>
+         <p>FSSAI certified kitchen with strict quality controls</p>
+        </div>
+       </div>
+       <div class="feature-item">
+        <div class="feature-icon">
+         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /> <circle cx="9" cy="7" r="4" /> <path d="M23 21v-2a4 4 0 0 0-3-3.87" /> <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+         </svg>
+        </div>
+        <div class="feature-text">
+         <h4>Expert Team</h4>
+         <p>Trained nutritionists and experienced kitchen staff</p>
+        </div>
+       </div>
+       <div class="feature-item">
+        <div class="feature-icon">
+         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" /> <path d="M12 6v6l4 2" />
+         </svg>
+        </div>
+        <div class="feature-text">
+         <h4>24/7 Service</h4>
+         <p>Round-the-clock meal delivery and support</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section class="contact" id="contact">
+    <div class="section-header"><span class="section-tag">Get In Touch</span>
+     <h2 class="section-title" id="contactTitle">Contact Us Today</h2>
+     <p class="section-subtitle">Ready to partner with us? Reach out and let's discuss how we can serve your patients</p>
+    </div>
+    <div class="contact-container">
+     <div class="contact-info">
+      <div class="contact-card animate-on-scroll">
+       <div class="contact-icon">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /> <polyline points="22,6 12,13 2,6" />
+        </svg>
+       </div>
+       <div>
+        <h4>Email Us</h4>
+        <p>shankarpradhan2004@gmail.com</p>
+       </div>
+      </div>
+      <div class="contact-card animate-on-scroll">
+       <div class="contact-icon">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+       </div>
+       <div>
+        <h4>Call Us</h4>
+        <p>+91 98765 43210</p>
+       </div>
+      </div>
+      <div class="contact-card animate-on-scroll">
+       <div class="contact-icon">
+        <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /> <circle cx="12" cy="10" r="3" />
+        </svg>
+       </div>
+       <div>
+        <h4>Visit Us</h4>
+        <p>Healthcare District, Mumbai</p>
+       </div>
+      </div>
+     </div>
+     <div class="contact-form-wrapper animate-on-scroll">
+      <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+       <div class="form-row">
+        <div class="form-group"><label for="name">Full Name</label> <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+        <div class="form-group"><label for="email">Email Address</label> <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+       </div>
+       <div class="form-row">
+        <div class="form-group"><label for="phone">Phone Number</label> <input type="tel" id="phone" name="phone" placeholder="Enter phone number">
+        </div>
+        <div class="form-group"><label for="hospital">Hospital Name</label> <input type="text" id="hospital" name="hospital" placeholder="Hospital/Organization">
+        </div>
+       </div>
+       <div class="form-group"><label for="message">Your Message</label> <textarea id="message" name="message" placeholder="Tell us about your requirements..." required></textarea>
+       </div><button type="submit" class="submit-btn">
+        <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13" /> <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg> Send Message </button>
+      </form>
+      <div class="form-success" id="formSuccess">
+       <h4>🎉 Message Sent Successfully!</h4>
+       <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Footer -->
+   <footer>
+    <div class="footer-container">
+     <div class="footer-main">
+      <div>
+       <div class="footer-brand">
+        <div class="footer-logo">
+         <svg width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+         </svg>
+        </div><span>Sachin Gupta</span>
+       </div>
+       <p class="footer-description">Delivering nutritious, hygienic meals to hospital patients with care and dedication. Your health, our priority.</p>
+       <div class="footer-social" style="margin-top: 1.5rem;"><a href="#" class="social-link" aria-label="Facebook">
+         <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+         </svg></a> <a href="#" class="social-link" aria-label="Instagram">
+         <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /> <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+         </svg></a> <a href="#" class="social-link" aria-label="LinkedIn">
+         <svg width="20" height="20" viewbox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /> <rect x="2" y="9" width="4" height="12" /> <circle cx="4" cy="4" r="2" />
+         </svg></a>
+       </div>
+      </div>
+      <div class="footer-links">
+       <h4>Quick Links</h4>
+       <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+       </ul>
+      </div>
+      <div class="footer-links">
+       <h4>Our Services</h4>
+       <ul>
+        <li><a href="#services">Patient Meals</a></li>
+        <li><a href="#services">Diet Planning</a></li>
+        <li><a href="#services">Hospital Catering</a></li>
+        <li><a href="#services">Special Diets</a></li>
+        <li><a href="#services">Consultation</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="footer-bottom">
+      <p class="footer-copyright" id="footerText">© 2024 Sachin Gupta Healthcare. All rights reserved.</p>
+      <div class="footer-legal"><a href="#">Privacy Policy</a> <a href="#">Terms of Service</a>
+      </div>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      hero_title: 'Nourishing Care for Every Patient',
+      hero_subtitle: 'Delivering exceptional teffen service to hospital patients with fresh, nutritious meals prepared with love and care. Your health is our priority.',
+      about_title: 'Caring for Patients Through Nutrition',
+      about_description: 'At Sachin Gupta Healthcare, we believe that proper nutrition is fundamental to patient recovery. Our teffen service delivers fresh, hygienically prepared meals to hospital patients, ensuring they receive the nourishment they need during their healing journey. With over a decade of experience, we partner with leading hospitals to provide exceptional food service that supports medical treatment and enhances patient comfort.',
+      services_title: 'Our Healthcare Services',
+      contact_title: 'Contact Us Today',
+      footer_text: '© 2024 Sachin Gupta Healthcare. All rights reserved.',
+      primary_color: '#22c55e',
+      secondary_color: '#f0fdf4',
+      text_color: '#1e3a2f',
+      accent_color: '#10b981',
+      highlight_color: '#86efac',
+      font_family: 'Quicksand',
+      font_size: 16
+    };
+
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          // Update hero section
+          const heroTitle = document.getElementById('heroTitle');
+          const titleText = config.hero_title || defaultConfig.hero_title;
+          const words = titleText.split(' ');
+          heroTitle.innerHTML = `<span>${words[0]}</span> ${words.slice(1).join(' ')}`;
+          
+          document.getElementById('heroSubtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+          
+          // Update about section
+          const aboutTitle = document.getElementById('aboutTitle');
+          const aboutTitleText = config.about_title || defaultConfig.about_title;
+          const aboutWords = aboutTitleText.split(' ');
+          if (aboutWords.length > 2) {
+            aboutTitle.innerHTML = `${aboutWords.slice(0, 2).join(' ')} <span>${aboutWords.slice(2).join(' ')}</span>`;
+          } else {
+            aboutTitle.textContent = aboutTitleText;
+          }
+          
+          document.getElementById('aboutDescription').textContent = config.about_description || defaultConfig.about_description;
+          
+          // Update services section
+          document.getElementById('servicesTitle').textContent = config.services_title || defaultConfig.services_title;
+          
+          // Update contact section
+          document.getElementById('contactTitle').textContent = config.contact_title || defaultConfig.contact_title;
+          
+          // Update footer
+          document.getElementById('footerText').textContent = config.footer_text || defaultConfig.footer_text;
+
+          // Apply colors
+          const root = document.documentElement;
+          root.style.setProperty('--color-primary', config.primary_color || defaultConfig.primary_color);
+          root.style.setProperty('--color-secondary', config.secondary_color || defaultConfig.secondary_color);
+          root.style.setProperty('--color-text', config.text_color || defaultConfig.text_color);
+          root.style.setProperty('--color-accent', config.accent_color || defaultConfig.accent_color);
+          root.style.setProperty('--color-highlight', config.highlight_color || defaultConfig.highlight_color);
+
+          // Apply font
+          const fontFamily = config.font_family || defaultConfig.font_family;
+          document.querySelectorAll('h1, h2, h3, h4, .logo-text, .stat-number').forEach(el => {
+            el.style.fontFamily = `${fontFamily}, sans-serif`;
+          });
+
+          // Apply font size
+          const baseSize = config.font_size || defaultConfig.font_size;
+          document.body.style.fontSize = `${baseSize}px`;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => window.elementSdk.setConfig({ secondary_color: value })
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => window.elementSdk.setConfig({ highlight_color: value })
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => window.elementSdk.setConfig({ text_color: value })
+            },
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => window.elementSdk.setConfig({ primary_color: value })
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => window.elementSdk.setConfig({ accent_color: value })
+            }
+          ],
+          borderables: [],
+          fontEditable: {
+            get: () => config.font_family || defaultConfig.font_family,
+            set: (value) => window.elementSdk.setConfig({ font_family: value })
+          },
+          fontSizeable: {
+            get: () => config.font_size || defaultConfig.font_size,
+            set: (value) => window.elementSdk.setConfig({ font_size: value })
+          }
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['hero_title', config.hero_title || defaultConfig.hero_title],
+          ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
+          ['about_title', config.about_title || defaultConfig.about_title],
+          ['about_description', config.about_description || defaultConfig.about_description],
+          ['services_title', config.services_title || defaultConfig.services_title],
+          ['contact_title', config.contact_title || defaultConfig.contact_title],
+          ['footer_text', config.footer_text || defaultConfig.footer_text]
+        ])
+      });
+    }
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const mobileNav = document.getElementById('mobileNav');
+      mobileNav.classList.toggle('active');
+      mobileNav.style.display = mobileNav.classList.contains('active') ? 'block' : 'none';
+    }
+
+    // Form submission handler
+    function handleSubmit(event) {
+      event.preventDefault();
+      const form = document.getElementById('contactForm');
+      const success = document.getElementById('formSuccess');
+      
+      form.style.display = 'none';
+      success.classList.add('show');
+      
+      setTimeout(() => {
+        form.style.display = 'grid';
+        success.classList.remove('show');
+        form.reset();
+      }, 4000);
+    }
+
+    // Scroll animations
+    function handleScrollAnimations() {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      elements.forEach(el => observer.observe(el));
+    }
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Initialize animations
+    handleScrollAnimations();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cc9d12447225539',t:'MTc3MDg3NTUxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
