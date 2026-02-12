@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Instant Website Prompt Generator</title>
+<style>
+body {
+  font-family: Arial;
+  padding: 30px;
+  background:#f5f5f5;
+}
+input, textarea, select {
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+}
+button {
+  padding:12px;
+  background:black;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+#output {
+  white-space:pre-wrap;
+  background:white;
+  padding:15px;
+  margin-top:20px;
+  border:1px solid #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Business Website Prompt Generator</h2>
+
+<input id="name" placeholder="Business Name">
+<input id="owner" placeholder="Owner Name">
+<input id="type" placeholder="Business Type">
+<input id="services" placeholder="Services">
+<input id="target" placeholder="Target Customers">
+<input id="city" placeholder="City">
+<input id="contact" placeholder="Contact Info">
+<input id="color" placeholder="Color Theme">
+<select id="style">
+<option>modern</option>
+<option>corporate</option>
+<option>playful</option>
+<option>premium</option>
+</select>
+
+<textarea id="about" placeholder="About Business"></textarea>
+
+<button onclick="generate()">Generate Prompt</button>
+
+<div id="output"></div>
+
+<script>
+function generate() {
+let prompt = `
+Create a complete responsive business website frontend using pure HTML and CSS.
+
+Business Details:
+Business Name: ${name.value}
+Owner Name: ${owner.value}
+Business Type: ${type.value}
+Services: ${services.value}
+Target Customers: ${target.value}
+City: ${city.value}
+Contact Info: ${contact.value}
+About Business: ${about.value}
+Color Theme: ${color.value}
+Style: ${style.value}
+
+Requirements:
+- Modern responsive layout
+- Hero section with headline + CTA
+- About section
+- Services cards
+- Testimonials
+- Contact form UI
+- Footer
+- Only HTML + CSS
+- Mobile responsive
+- Add Unsplash business related images
+- Return only full HTML file
+`;
+
+document.getElementById("output").innerText = prompt;
+}
+</script>
+
+</body>
+</html>
