@@ -90,8 +90,10 @@
      <div class="space-y-4">
       <div><label class="block text-sm font-medium text-gray-600 mb-2">Business Name / Website Title *</label> <input type="text" id="name" placeholder="e.g., TechSolutions Pro, Beauty Studio, EduHub" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all text-lg font-semibold">
       </div>
-      <div><label class="block text-sm font-medium text-gray-600 mb-2">What does your business do? *</label> <select id="type" onchange="updateColorPreference()" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all bg-white cursor-pointer font-medium"> <option value="">-- Select Your Industry --</option> <option value="Tech/IT">🔧 Tech / IT Services</option> <option value="Digital Marketing">📱 Digital Marketing</option> <option value="Beauty/Salon">💄 Beauty / Salon</option> <option value="Fitness/Gym">💪 Fitness / Gym</option> <option value="Real Estate">🏠 Real Estate</option> <option value="E-commerce">🛍️ E-commerce / Shop</option> <option value="Restaurant">🍕 Restaurant / Cafe</option> <option value="Education">📚 Education / Coaching</option> <option value="Healthcare">🏥 Healthcare / Medical</option> <option value="Finance">💰 Finance / Banking</option> <option value="Travel">✈️ Travel / Tourism</option> <option value="Fashion">👗 Fashion / Clothing</option> <option value="Photography">📸 Photography / Studio</option> <option value="Consulting">🎓 Consulting / Business</option> <option value="Legal">⚖️ Legal / Law Firm</option> <option value="Automotive">🚗 Automotive / Dealership</option> <option value="Entertainment">🎬 Entertainment / Events</option> </select>
-       <p class="text-xs text-gray-500 mt-2">💡 Choose your industry - colors will auto-update!</p>
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">What does your business do? *</label>
+       <div class="flex gap-2"><select id="type" onchange="updateColorPreference()" class="flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all bg-white cursor-pointer font-medium"> <option value="">-- Select Industry --</option> <option value="Tech/IT">🔧 Tech / IT Services</option> <option value="Digital Marketing">📱 Digital Marketing</option> <option value="Beauty/Salon">💄 Beauty / Salon</option> <option value="Fitness/Gym">💪 Fitness / Gym</option> <option value="Real Estate">🏠 Real Estate</option> <option value="E-commerce">🛍️ E-commerce / Shop</option> <option value="Restaurant">🍕 Restaurant / Cafe</option> <option value="Education">📚 Education / Coaching</option> <option value="Healthcare">🏥 Healthcare / Medical</option> <option value="Finance">💰 Finance / Banking</option> <option value="Travel">✈️ Travel / Tourism</option> <option value="Fashion">👗 Fashion / Clothing</option> <option value="Photography">📸 Photography / Studio</option> <option value="Consulting">🎓 Consulting / Business</option> <option value="Legal">⚖️ Legal / Law Firm</option> <option value="Automotive">🚗 Automotive / Dealership</option> <option value="Entertainment">🎬 Entertainment / Events</option> </select> <input type="text" id="typeCustom" placeholder="Or type custom..." oninput="updateColorPreferenceCustom()" class="flex-1 px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all">
+       </div>
+       <p class="text-xs text-gray-500 mt-2">💡 Pick from list or type your own - colors auto-update!</p>
       </div>
       <div><label class="block text-sm font-medium text-gray-600 mb-2">Contact Info (Email / Phone)</label> <input type="text" id="contact" placeholder="e.g., hello@business.com, +91 98765 43210" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all">
       </div>
@@ -144,9 +146,9 @@
     <div class="mt-8 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl p-6 border border-purple-100">
      <h3 class="title-font text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2"><span>💡</span> How It Works</h3>
      <ul class="text-gray-600 space-y-2 text-sm">
-      <li>✓ Choose your business type - colors auto-select!</li>
+      <li>✓ Choose from dropdown or type your business type</li>
+      <li>✓ Colors auto-select based on industry</li>
       <li>✓ Fill required fields (*) for quick prompt</li>
-      <li>✓ Optional fields customize further</li>
       <li>✓ Copy prompt → Paste in ChatGPT or Claude</li>
       <li>✓ Get professional website code instantly</li>
      </ul>
@@ -188,16 +190,59 @@
       teal: "Modern & Cool"
     };
 
-    // Update color when business type changes
+    // Smart keyword mapping for color suggestions
+    const colorKeywords = {
+      blue: ['tech', 'it', 'software', 'consulting', 'it services', 'development', 'programming'],
+      purple: ['design', 'creative', 'marketing', 'digital marketing', 'beauty', 'salon', 'fashion', 'art'],
+      red: ['fitness', 'gym', 'sports', 'entertainment', 'events', 'energy'],
+      orange: ['restaurant', 'food', 'cafe', 'e-commerce', 'shop', 'retail', 'hospitality'],
+      green: ['healthcare', 'medical', 'wellness', 'organic', 'eco', 'nature', 'agriculture'],
+      dark: ['finance', 'banking', 'real estate', 'legal', 'photography', 'automotive', 'corporate'],
+      teal: ['education', 'coaching', 'training', 'travel', 'tourism', 'technology']
+    };
+
+    // Smart color suggestion based on keywords
+    function suggestColorFromText(text) {
+      const lowerText = text.toLowerCase();
+      
+      for (const [color, keywords] of Object.entries(colorKeywords)) {
+        for (const keyword of keywords) {
+          if (lowerText.includes(keyword)) {
+            return color;
+          }
+        }
+      }
+      return 'blue'; // default
+    }
+
+    // Update color from dropdown
     function updateColorPreference() {
       const businessType = document.getElementById('type').value;
+      const customInput = document.getElementById('typeCustom');
       const colorDropdown = document.getElementById('color');
       const suggestion = document.getElementById('colorSuggestion');
 
-      if (businessType && businessColorMap[businessType]) {
+      if (businessType) {
+        customInput.value = '';
         const suggestedColor = businessColorMap[businessType];
         colorDropdown.value = suggestedColor;
         suggestion.innerHTML = `✨ Perfect for ${businessType}! Using: ${colorDescriptions[suggestedColor]}`;
+        suggestion.style.color = '#059669';
+      }
+    }
+
+    // Update color from custom text
+    function updateColorPreferenceCustom() {
+      const customText = document.getElementById('typeCustom').value;
+      const typeDropdown = document.getElementById('type');
+      const colorDropdown = document.getElementById('color');
+      const suggestion = document.getElementById('colorSuggestion');
+
+      if (customText && customText.trim().length > 0) {
+        typeDropdown.value = '';
+        const suggestedColor = suggestColorFromText(customText);
+        colorDropdown.value = suggestedColor;
+        suggestion.innerHTML = `✨ For "${customText}"! Using: ${colorDescriptions[suggestedColor]}`;
         suggestion.style.color = '#059669';
       }
     }
@@ -219,7 +264,7 @@
     // Intelligent prompt generator
     function generatePrompt() {
       const name = document.getElementById('name').value || '[Business Name]';
-      let type = document.getElementById('type').value || '[Business Type]';
+      let type = document.getElementById('type').value || document.getElementById('typeCustom').value || '[Business Type]';
       const contact = document.getElementById('contact').value || '[Contact Info]';
       const style = document.getElementById('style').value;
       let color = document.getElementById('color').value;
@@ -251,11 +296,9 @@
         teal: "modern teal and cool tones"
       };
 
-      // If auto is selected, use mapped color
-      if (color === 'auto' && businessColorMap[type]) {
-        color = businessColorMap[type];
-      } else if (color === 'auto') {
-        color = 'blue';
+      // If auto is selected, use mapped color or smart suggestion
+      if (color === 'auto') {
+        color = businessColorMap[type] || suggestColorFromText(type) || 'blue';
       }
 
       const sectionDescriptions = {
@@ -415,5 +458,5 @@ Generate the complete website HTML now.`;
       ])
     });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ceb63ec42abff64',t:'MTc3MTIyNzU1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9cedc7cb54cf9a40',t:'MTc3MTI1MjYyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
