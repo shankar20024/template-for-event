@@ -1,94 +1,419 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Instant Website Prompt Generator</title>
-<style>
-body {
-  font-family: Arial;
-  padding: 30px;
-  background:#f5f5f5;
-}
-input, textarea, select {
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-}
-button {
-  padding:12px;
-  background:black;
-  color:white;
-  border:none;
-  cursor:pointer;
-}
-#output {
-  white-space:pre-wrap;
-  background:white;
-  padding:15px;
-  margin-top:20px;
-  border:1px solid #ccc;
-}
-</style>
-</head>
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Website Prompt Generator</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    .title-font { font-family: 'Space Grotesk', sans-serif; }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .card-shadow {
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+    
+    .input-focus:focus {
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-gradient {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+    
+    .output-box {
+      background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .section-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f0f0f0;
+    }
 
-<body>
+    .color-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-gray-50 overflow-auto">
+  <div class="min-h-full w-full"><!-- Header -->
+   <header class="gradient-bg text-white py-8 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+     <h1 id="mainTitle" class="title-font text-3xl md:text-4xl font-bold mb-3">⚡ Smart Website Generator</h1>
+     <p id="subtitleText" class="text-purple-100 text-lg">5 minutes to a professional AI prompt</p>
+    </div>
+   </header><!-- Main Content -->
+   <main class="max-w-4xl mx-auto px-4 py-8"><!-- Quick Input Section -->
+    <div class="section-card card-shadow">
+     <div class="section-title"><span class="text-2xl">⚡</span>
+      <h2 class="title-font text-xl font-semibold text-gray-800">Business Basics</h2>
+     </div>
+     <div class="space-y-4">
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">Business Name / Website Title *</label> <input type="text" id="name" placeholder="e.g., TechSolutions Pro, Beauty Studio, EduHub" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all text-lg font-semibold">
+      </div>
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">What does your business do? *</label> <select id="type" onchange="updateColorPreference()" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all bg-white cursor-pointer font-medium"> <option value="">-- Select Your Industry --</option> <option value="Tech/IT">🔧 Tech / IT Services</option> <option value="Digital Marketing">📱 Digital Marketing</option> <option value="Beauty/Salon">💄 Beauty / Salon</option> <option value="Fitness/Gym">💪 Fitness / Gym</option> <option value="Real Estate">🏠 Real Estate</option> <option value="E-commerce">🛍️ E-commerce / Shop</option> <option value="Restaurant">🍕 Restaurant / Cafe</option> <option value="Education">📚 Education / Coaching</option> <option value="Healthcare">🏥 Healthcare / Medical</option> <option value="Finance">💰 Finance / Banking</option> <option value="Travel">✈️ Travel / Tourism</option> <option value="Fashion">👗 Fashion / Clothing</option> <option value="Photography">📸 Photography / Studio</option> <option value="Consulting">🎓 Consulting / Business</option> <option value="Legal">⚖️ Legal / Law Firm</option> <option value="Automotive">🚗 Automotive / Dealership</option> <option value="Entertainment">🎬 Entertainment / Events</option> </select>
+       <p class="text-xs text-gray-500 mt-2">💡 Choose your industry - colors will auto-update!</p>
+      </div>
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">Contact Info (Email / Phone)</label> <input type="text" id="contact" placeholder="e.g., hello@business.com, +91 98765 43210" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all">
+      </div>
+     </div>
+    </div><!-- Design Preferences Section -->
+    <div class="section-card card-shadow">
+     <div class="section-title"><span class="text-2xl">🎨</span>
+      <h2 class="title-font text-xl font-semibold text-gray-800">Design Preferences</h2>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">Design Style</label> <select id="style" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all bg-white cursor-pointer"> <option value="modern">🌟 Modern &amp; Clean</option> <option value="corporate">🏛️ Corporate &amp; Professional</option> <option value="playful">🎈 Creative &amp; Fun</option> <option value="premium">👑 Premium &amp; Elegant</option> <option value="minimal">✨ Minimal &amp; Simple</option> <option value="bold">🔥 Bold &amp; Dynamic</option> </select>
+      </div>
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">Color Preference <span class="text-xs text-green-600">(Auto-Selected)</span></label>
+       <div class="flex gap-2 items-start"><select id="color" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all bg-white cursor-pointer"> <option value="auto">🤖 Auto (Based on Industry)</option> <option value="blue">🔵 Blue &amp; White</option> <option value="dark">🌙 Dark Theme</option> <option value="orange">🟠 Orange &amp; Warm</option> <option value="green">💚 Green &amp; Fresh</option> <option value="purple">💜 Purple &amp; Vibrant</option> <option value="red">❤️ Red &amp; Bold</option> <option value="teal">🧊 Teal &amp; Modern</option> </select>
+       </div>
+       <p id="colorSuggestion" class="text-xs text-green-600 mt-2">💡 Select business type above to see auto color</p>
+      </div>
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">Website Type</label> <select id="sections" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all bg-white cursor-pointer"> <option value="complete">📦 Complete (All Sections)</option> <option value="simple">📄 Simple (Hero + Services + Contact)</option> <option value="portfolio">🖼️ Portfolio Focused</option> <option value="landing">🚀 Landing Page</option> </select>
+      </div>
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">Add Special Features?</label> <select id="features" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 input-focus focus:border-purple-400 outline-none transition-all bg-white cursor-pointer"> <option value="none">✓ Basic Features</option> <option value="testimonials">⭐ + Testimonials</option> <option value="team">👥 + Team Section</option> <option value="pricing">💰 + Pricing Table</option> <option value="blog">📝 + Blog Section</option> </select>
+      </div>
+     </div>
+    </div><!-- Optional Details Section -->
+    <div class="section-card card-shadow bg-blue-50">
+     <div class="section-title pb-3"><span class="text-2xl">✏️</span>
+      <h2 class="title-font text-xl font-semibold text-gray-800">Optional: Extra Details</h2>
+     </div>
+     <p class="text-xs text-gray-500 mb-4">💡 Leave blank if you want AI to decide</p>
+     <div class="space-y-4">
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">Main Services / Products</label> <input type="text" id="services" placeholder="e.g., Web Design, Logo Creation, Branding" class="w-full px-4 py-3 rounded-xl border-2 border-blue-200 input-focus focus:border-purple-400 outline-none transition-all">
+      </div>
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">Target Audience</label> <input type="text" id="target" placeholder="e.g., Small Businesses, Startups, Students" class="w-full px-4 py-3 rounded-xl border-2 border-blue-200 input-focus focus:border-purple-400 outline-none transition-all">
+      </div>
+      <div><label class="block text-sm font-medium text-gray-600 mb-2">About Your Business</label> <textarea id="about" rows="2" placeholder="Brief description - AI will enhance it..." class="w-full px-4 py-3 rounded-xl border-2 border-blue-200 input-focus focus:border-purple-400 outline-none transition-all resize-none"></textarea>
+      </div>
+     </div>
+    </div><!-- Button Section -->
+    <div class="flex flex-col md:flex-row gap-4 justify-center my-8"><button id="generateBtn" onclick="generatePrompt()" class="btn-gradient text-white px-12 py-4 rounded-2xl font-semibold text-lg inline-flex items-center gap-3 justify-center flex-1 md:flex-none"> <span>✨</span> <span id="buttonText">Generate Smart Prompt</span> <span>→</span> </button> <button onclick="openInCanva()" class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-2xl font-semibold inline-flex items-center gap-2 justify-center flex-1 md:flex-none transition-all"> <span>📐</span> <span>Use in Canva</span> <span>↗️</span> </button>
+    </div><!-- Output Section -->
+    <div id="outputSection" class="hidden fade-in">
+     <div class="section-card card-shadow">
+      <div class="flex items-center justify-between mb-4">
+       <div class="section-title mb-0 pb-0 border-0"><span class="text-2xl">📋</span>
+        <h2 class="title-font text-xl font-semibold text-gray-800">Your AI Prompt</h2>
+       </div><button onclick="copyPrompt()" class="bg-purple-100 hover:bg-purple-200 text-purple-700 px-4 py-2 rounded-xl font-medium transition-all flex items-center gap-2"> <span id="copyIcon">📄</span> <span id="copyText">Copy</span> </button>
+      </div>
+      <div id="output" class="output-box text-green-400 p-6 rounded-xl font-mono text-sm leading-relaxed overflow-x-auto whitespace-pre-wrap max-h-96 overflow-y-auto"></div>
+     </div>
+    </div><!-- Tips Section -->
+    <div class="mt-8 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-2xl p-6 border border-purple-100">
+     <h3 class="title-font text-lg font-semibold text-gray-800 mb-3 flex items-center gap-2"><span>💡</span> How It Works</h3>
+     <ul class="text-gray-600 space-y-2 text-sm">
+      <li>✓ Choose your business type - colors auto-select!</li>
+      <li>✓ Fill required fields (*) for quick prompt</li>
+      <li>✓ Optional fields customize further</li>
+      <li>✓ Copy prompt → Paste in ChatGPT or Claude</li>
+      <li>✓ Get professional website code instantly</li>
+     </ul>
+    </div>
+   </main><!-- Footer -->
+   <footer class="bg-gray-800 text-gray-400 py-6 px-4 text-center mt-8">
+    <p class="text-sm">Made with 💜 for Entrepreneurs &amp; Developers</p>
+   </footer>
+  </div>
+  <script>
+    // Business type to color mapping
+    const businessColorMap = {
+      "Tech/IT": "blue",
+      "Digital Marketing": "purple",
+      "Beauty/Salon": "purple",
+      "Fitness/Gym": "red",
+      "Real Estate": "dark",
+      "E-commerce": "orange",
+      "Restaurant": "orange",
+      "Education": "teal",
+      "Healthcare": "green",
+      "Finance": "dark",
+      "Travel": "teal",
+      "Fashion": "purple",
+      "Photography": "dark",
+      "Consulting": "blue",
+      "Legal": "dark",
+      "Automotive": "dark",
+      "Entertainment": "red"
+    };
 
-<h2>Business Website Prompt Generator</h2>
+    const colorDescriptions = {
+      blue: "Professional Blue & White",
+      dark: "Modern Dark Theme",
+      orange: "Warm Orange & Energy",
+      green: "Fresh & Eco-Friendly",
+      purple: "Creative & Vibrant",
+      red: "Bold & Energetic",
+      teal: "Modern & Cool"
+    };
 
-<input id="name" placeholder="Business Name">
-<input id="owner" placeholder="Owner Name">
-<input id="type" placeholder="Business Type">
-<input id="services" placeholder="Services">
-<input id="target" placeholder="Target Customers">
-<input id="city" placeholder="City">
-<input id="contact" placeholder="Contact Info">
-<input id="color" placeholder="Color Theme">
-<select id="style">
-<option>modern</option>
-<option>corporate</option>
-<option>playful</option>
-<option>premium</option>
-</select>
+    // Update color when business type changes
+    function updateColorPreference() {
+      const businessType = document.getElementById('type').value;
+      const colorDropdown = document.getElementById('color');
+      const suggestion = document.getElementById('colorSuggestion');
 
-<textarea id="about" placeholder="About Business"></textarea>
+      if (businessType && businessColorMap[businessType]) {
+        const suggestedColor = businessColorMap[businessType];
+        colorDropdown.value = suggestedColor;
+        suggestion.innerHTML = `✨ Perfect for ${businessType}! Using: ${colorDescriptions[suggestedColor]}`;
+        suggestion.style.color = '#059669';
+      }
+    }
 
-<button onclick="generate()">Generate Prompt</button>
+    // Default configuration
+    const defaultConfig = {
+      main_title: "⚡ Smart Website Generator",
+      subtitle_text: "5 minutes to a professional AI prompt",
+      button_text: "Generate Smart Prompt",
+      primary_color: "#667eea",
+      secondary_color: "#764ba2",
+      background_color: "#f9fafb",
+      text_color: "#1f2937",
+      accent_color: "#ffffff",
+      font_family: "Inter",
+      font_size: 16
+    };
 
-<div id="output"></div>
+    // Intelligent prompt generator
+    function generatePrompt() {
+      const name = document.getElementById('name').value || '[Business Name]';
+      let type = document.getElementById('type').value || '[Business Type]';
+      const contact = document.getElementById('contact').value || '[Contact Info]';
+      const style = document.getElementById('style').value;
+      let color = document.getElementById('color').value;
+      const sections = document.getElementById('sections').value;
+      const features = document.getElementById('features').value;
+      
+      // Optional fields
+      const services = document.getElementById('services').value;
+      const target = document.getElementById('target').value;
+      const about = document.getElementById('about').value;
 
-<script>
-function generate() {
-let prompt = `
-Create a complete responsive business website frontend using pure HTML and CSS.
+      // Get design descriptions
+      const styleDescriptions = {
+        modern: "modern, minimalist, clean design with lots of whitespace",
+        corporate: "professional, corporate, trustworthy design",
+        playful: "creative, fun, engaging, vibrant design",
+        premium: "luxury, elegant, sophisticated, premium design",
+        minimal: "very minimal, simple, ultra-clean design",
+        bold: "bold, dynamic, high-contrast, eye-catching design"
+      };
 
-Business Details:
-Business Name: ${name.value}
-Owner Name: ${owner.value}
-Business Type: ${type.value}
-Services: ${services.value}
-Target Customers: ${target.value}
-City: ${city.value}
-Contact Info: ${contact.value}
-About Business: ${about.value}
-Color Theme: ${color.value}
-Style: ${style.value}
+      const finalColorDescriptions = {
+        blue: "professional blue and white color scheme",
+        dark: "dark theme with dark background and light text",
+        orange: "warm orange and golden tones",
+        green: "fresh green and nature-inspired colors",
+        purple: "vibrant purple and creative tones",
+        red: "bold red and energetic colors",
+        teal: "modern teal and cool tones"
+      };
 
-Requirements:
-- Modern responsive layout
-- Hero section with headline + CTA
-- About section
-- Services cards
-- Testimonials
-- Contact form UI
-- Footer
-- Only HTML + CSS
-- Mobile responsive
-- Add Unsplash business related images
-- Return only full HTML file
-`;
+      // If auto is selected, use mapped color
+      if (color === 'auto' && businessColorMap[type]) {
+        color = businessColorMap[type];
+      } else if (color === 'auto') {
+        color = 'blue';
+      }
 
-document.getElementById("output").innerText = prompt;
-}
-</script>
+      const sectionDescriptions = {
+        complete: `Hero section with headline and CTA
+- About/Services section
+- Features/Products cards
+- Testimonials section
+- Contact form with submission
+- Footer with social links`,
+        simple: `Hero section with main CTA
+- Key services/features (3-4 items)
+- Contact form
+- Footer`,
+        portfolio: `Hero section with portfolio showcase
+- Portfolio/Gallery grid (images or cards)
+- About/Bio section
+- Contact section
+- Footer`,
+        landing: `Hero section with strong headline
+- Value proposition (benefits)
+- Call-to-action buttons
+- Simple footer`
+      };
 
-</body>
+      const featureTexts = {
+        none: "",
+        testimonials: "\n- Testimonials/Reviews section with client quotes",
+        team: "\n- Team members section with photos and bios",
+        pricing: "\n- Pricing plans table/cards",
+        blog: "\n- Blog posts section with article previews"
+      };
+
+      // Build smart prompt
+      let prompt = `Create a professional, responsive business website frontend.
+
+BUSINESS DETAILS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🏢 Business/Brand Name: ${name}
+📌 Business Type: ${type}
+📞 Contact: ${contact}`;
+
+      if (services) {
+        prompt += `\n🛠️ Main Services: ${services}`;
+      }
+      if (target) {
+        prompt += `\n🎯 Target Audience: ${target}`;
+      }
+      if (about) {
+        prompt += `\n📝 About: ${about}`;
+      }
+
+      prompt += `
+
+DESIGN REQUIREMENTS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🎨 Style: ${styleDescriptions[style]}
+🌈 Colors: ${finalColorDescriptions[color]}
+📱 Responsive: Mobile-first, works on all devices
+
+WEBSITE STRUCTURE:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${sectionDescriptions[sections]}${featureTexts[features]}
+
+TECHNICAL SPECIFICATIONS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ Pure HTML5 + CSS3 only (no frameworks/libraries)
+✓ Fully responsive (mobile, tablet, desktop)
+✓ Clean, semantic HTML structure
+✓ Modern CSS with flexbox/grid
+✓ Smooth hover animations and transitions
+✓ Optimized for web performance
+✓ Professional typography with Google Fonts
+✓ Include placeholder Unsplash images where needed
+✓ Add simple SVG or Font Awesome icons
+✓ Form fields with proper labels and placeholders
+✓ Accessible and SEO-friendly markup
+
+OUTPUT:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Return a single complete HTML file ready to use.
+Include all CSS in <style> tags.
+Add helpful comments in code.
+Use easy-to-replace placeholder text.
+
+Generate the complete website HTML now.`;
+
+      document.getElementById('output').textContent = prompt;
+      document.getElementById('outputSection').classList.remove('hidden');
+      document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyPrompt() {
+      const output = document.getElementById('output').textContent;
+      navigator.clipboard.writeText(output).then(() => {
+        const copyIcon = document.getElementById('copyIcon');
+        const copyText = document.getElementById('copyText');
+        copyIcon.textContent = '✅';
+        copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          copyIcon.textContent = '📄';
+          copyText.textContent = 'Copy';
+        }, 2000);
+      });
+    }
+
+    function openInCanva() {
+      window.open('https://www.canva.com', '_blank');
+    }
+
+    // Initialize Element SDK
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (config) => {
+        document.getElementById('mainTitle').textContent = config.main_title || defaultConfig.main_title;
+        document.getElementById('subtitleText').textContent = config.subtitle_text || defaultConfig.subtitle_text;
+        document.getElementById('buttonText').textContent = config.button_text || defaultConfig.button_text;
+
+        const primaryColor = config.primary_color || defaultConfig.primary_color;
+        const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+        const bgColor = config.background_color || defaultConfig.background_color;
+        const textColor = config.text_color || defaultConfig.text_color;
+        const accentColor = config.accent_color || defaultConfig.accent_color;
+
+        document.body.style.backgroundColor = bgColor;
+        document.querySelector('header').style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+        document.getElementById('generateBtn').style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+
+        document.querySelectorAll('.section-card').forEach(card => {
+          card.style.backgroundColor = accentColor;
+        });
+
+        const fontFamily = config.font_family || defaultConfig.font_family;
+        const baseFontStack = 'Inter, sans-serif';
+        document.body.style.fontFamily = `${fontFamily}, ${baseFontStack}`;
+
+        const baseSize = config.font_size || defaultConfig.font_size;
+        document.querySelectorAll('p, label, li').forEach(el => {
+          el.style.fontSize = `${baseSize * 0.875}px`;
+        });
+      },
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          { get: () => config.background_color || defaultConfig.background_color, set: (value) => window.elementSdk.setConfig({ background_color: value }) },
+          { get: () => config.accent_color || defaultConfig.accent_color, set: (value) => window.elementSdk.setConfig({ accent_color: value }) },
+          { get: () => config.text_color || defaultConfig.text_color, set: (value) => window.elementSdk.setConfig({ text_color: value }) },
+          { get: () => config.primary_color || defaultConfig.primary_color, set: (value) => window.elementSdk.setConfig({ primary_color: value }) },
+          { get: () => config.secondary_color || defaultConfig.secondary_color, set: (value) => window.elementSdk.setConfig({ secondary_color: value }) }
+        ],
+        borderables: [],
+        fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (value) => window.elementSdk.setConfig({ font_family: value }) },
+        fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (value) => window.elementSdk.setConfig({ font_size: value }) }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ["main_title", config.main_title || defaultConfig.main_title],
+        ["subtitle_text", config.subtitle_text || defaultConfig.subtitle_text],
+        ["button_text", config.button_text || defaultConfig.button_text]
+      ])
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ceb63ec42abff64',t:'MTc3MTIyNzU1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
